@@ -51,8 +51,7 @@ package-job:
   stage: package  
   script:    
     - mvn package
-    - echo "Packaging application..."
-    - java -jar target/medhead-RESTful-PoC.jar
+    - echo "Packaging application..."    
     - echo "Application successfully packaged."
 
 verify-job:
