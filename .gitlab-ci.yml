@@ -18,8 +18,7 @@ services:
 variables:
   POSTGRES_DB: bddmedhead
   POSTGRES_USER: sophonie
-  POSTGRES_PASSWORD: qvmsbtkr
-  POSTGRES_PORT: 5432
+  POSTGRES_PASSWORD: qvmsbtkr  
   POSTGRES_HOST_AUTH_METHOD: trust
 
 image: maven:latest
