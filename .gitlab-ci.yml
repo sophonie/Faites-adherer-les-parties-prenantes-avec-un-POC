@@ -46,5 +46,7 @@ deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   script:
     - mvn install
-    - echo "Deploying application..."
+    - echo "Deploying application..."    
+    - java -jar target/medhead-RESTful-PoC.jar
     - echo "Application successfully deployed."
+
