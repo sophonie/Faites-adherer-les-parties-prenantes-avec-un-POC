@@ -54,6 +54,4 @@ public class HopitalFacadeTest { // Tests intégration couche service avec Mocki
             Assertions.assertTrue(specialite.getNom().equals(code));
         }
     }
-    
-    
 }
