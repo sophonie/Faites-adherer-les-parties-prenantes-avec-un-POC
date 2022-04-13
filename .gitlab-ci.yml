@@ -28,6 +28,7 @@ stages:          # List of stages for jobs, and their order of execution
   - package
   - verify
   - install
+  #- deploy
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -67,4 +68,9 @@ install-job:      # This job runs in the install stage.
     - echo "Installing application..."            
     - echo "Application successfully installed."
 
-
+#deploy-job:      # This job runs in the install stage.
+#  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+#  script:
+#    - mvn deploy
+#    - echo "Deploying application..."            
+#    - echo "Application successfully deployed."
