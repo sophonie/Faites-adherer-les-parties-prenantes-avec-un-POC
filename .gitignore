@@ -1,3 +1,8 @@
+# Config file
+nbactions.xml
+nbactions-development-mode.xml
+nbactions-release-profile.xml
+
 # Compiled class file
 *.class
 
