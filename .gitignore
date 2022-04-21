@@ -28,4 +28,3 @@ nbactions-release-profile.xml
 hs_err_pid*
 /nbproject/
 /target/
-src/test/

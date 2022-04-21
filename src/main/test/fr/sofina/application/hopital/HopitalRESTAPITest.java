@@ -9,6 +9,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
@@ -23,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class HopitalRESTAPITest { // Tests API REST couche controller avec Hamcrest
 
     @Test
+    @Disabled
     public void testLitsDisponibles() throws IOException {
         // given
         final int valeur = 7; // code hopital
@@ -33,7 +35,8 @@ public class HopitalRESTAPITest { // Tests API REST couche controller avec Hamcr
         assertThat(httpResponse.getStatusLine().getStatusCode(), equalTo(HttpStatus.SC_OK));
     }
     
-    @Test    
+    @Test
+    @Disabled
     public void testFindSpecialiteByCode() throws IOException {
         // given
         final Long valeur = 11L; // code specialite
