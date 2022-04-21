@@ -214,6 +214,8 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>            
             <scope>test</scope>
+            <version>5.8.2</version>
+            <type>jar</type>
         </dependency>
         <!-- mockito-core -->
         <dependency>
@@ -234,9 +236,10 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        <!-- httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>            
+            <artifactId>httpclient</artifactId>
         </dependency>
         <!-- jackson-databind --> 
         <!-- obligatoire pour convertir les objets JAVA en données JSON -->
