@@ -1,16 +1,12 @@
-package fr.sofina.specialite;
+package fr.sofina.application.specialite;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.sofina.hopital.Hopital;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -22,35 +18,33 @@ public class Specialite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_specialite", unique = true, nullable = false, columnDefinition = "SMALLSERIAL")
-    private int codespecialite;
+    @Column(name = "code_specialite", unique = true, nullable = false)
+    private Long codespecialite;
 
     @Column(name = "nom_specialite", nullable = false)
     @NotBlank
     private String nom;
 
-    @Column(name = "code_groupe_specialite", nullable = false, columnDefinition = "INT2")
-    private int codeGroupeSpecialite;
-    
-    @ManyToMany
-    private List<Hopital> hopitaux;    
+    @Column(name = "code_groupe_specialite", nullable = false)
+    private Short groupespecialite;
 
     public Specialite() {
-        this.hopitaux = new ArrayList<>();
-    }
-
-    public Specialite(String nom) {
-        this.nom = nom;
     }
     
-    public Specialite(
-            @JsonProperty("code_specialite") final int codespecialite,
-            @JsonProperty("nom") final String nom) {
+    public Specialite(Long codespecialite) {
         this.codespecialite = codespecialite;
-        this.nom = nom;
     }
 
-    public int getCodespecialite() {
+    public Specialite(
+            @JsonProperty("code_specialite") final Long codespecialite,
+            @JsonProperty("nom_specialite") final String nom,
+            @JsonProperty("code_groupe_specialite") final Short groupespecialite) {
+        this.codespecialite = codespecialite;
+        this.nom = nom;
+        this.groupespecialite = groupespecialite;
+    }
+
+    public Long getCodespecialite() {
         return codespecialite;
     }
 
@@ -58,11 +52,19 @@ public class Specialite implements Serializable {
         return nom;
     }
 
-    public int getCodeGroupeSpecialite() {
-        return codeGroupeSpecialite;
+    public Short getGroupeSpecialite() {
+        return groupespecialite;
     }
 
-    public List<Hopital> getHopitaux() {
-        return hopitaux;
+    public void setCodespecialite(Long codespecialite) {
+        this.codespecialite = codespecialite;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setGroupeSpecialite(Short groupespecialite) {
+        this.groupespecialite = groupespecialite;
     }
 }

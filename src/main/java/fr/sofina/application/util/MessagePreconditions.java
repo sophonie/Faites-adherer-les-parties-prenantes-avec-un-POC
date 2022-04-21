@@ -1,4 +1,4 @@
-package fr.sofina.util;
+package fr.sofina.application.util;
 
 public class MessagePreconditions {
 

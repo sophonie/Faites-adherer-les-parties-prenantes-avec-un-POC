@@ -1,6 +1,6 @@
-package fr.sofina.util;
+package fr.sofina.application.util;
 
-import fr.sofina.patient.Patient;
+import fr.sofina.application.patient.Patient;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

@@ -1,4 +1,4 @@
-package fr.sofina.patient;
+package fr.sofina.application.patient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
@@ -19,7 +19,7 @@ public class Patient implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_patient", unique = true, nullable = false, columnDefinition = "SMALLSERIAL")
+    @Column(name = "code_patient", unique = true, nullable = false)
     private int codepatient;
 
     @Column(name = "nom_patient", nullable = false)
@@ -30,7 +30,7 @@ public class Patient implements Serializable {
     @NotBlank
     private String prenom;
 
-    @Column(name = "datenaissance_patient", nullable = false, columnDefinition = "DATE")
+    @Column(name = "datenaissance_patient", nullable = false)
     @NotBlank
     private Date datenaissance;
 
@@ -38,7 +38,7 @@ public class Patient implements Serializable {
     @NotBlank
     private String genre;
 
-    @Column(name = "no_ss_patient", nullable = false, columnDefinition = "NUMERIC")
+    @Column(name = "no_ss_patient", nullable = false)
     @NotBlank
     private int no_ss;
 

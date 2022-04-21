@@ -1,6 +1,6 @@
-package fr.sofina.util;
+package fr.sofina.application.util;
 
-import fr.sofina.hopital.HopitalIntrouvableException;
+import fr.sofina.application.hopital.HopitalIntrouvableException;
 
 public class RestPreconditions {
 

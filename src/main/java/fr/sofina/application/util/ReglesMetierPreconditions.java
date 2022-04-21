@@ -1,4 +1,4 @@
-package fr.sofina.util;
+package fr.sofina.application.util;
 
 public class ReglesMetierPreconditions {
     public static final String MESSAGE_VALEUR_POSITIVE = "L'argument %s valeur doit être strictement positif";

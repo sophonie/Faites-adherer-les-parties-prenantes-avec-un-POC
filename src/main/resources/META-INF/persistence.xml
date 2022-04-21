@@ -12,6 +12,6 @@
             <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
             <property name="current_session_context_class">thread</property>
             <property name="hibernate.show_sql">true</property>
-        </properties>    
+        </properties>        
     </persistence-unit>
 </persistence>
