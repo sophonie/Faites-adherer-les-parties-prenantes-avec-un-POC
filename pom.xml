@@ -234,24 +234,10 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-<<<<<<< HEAD
+        <!-- httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>            
-=======
-        <!-- mapstruct -->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>1.3.1.Final</version>
-            <type>jar</type>
-        </dependency>
-        <!-- modelmapper-spring -->
-        <dependency>
-            <groupId>org.modelmapper.extensions</groupId>
-            <artifactId>modelmapper-spring</artifactId>
-            <version>2.4.5</version>
->>>>>>> e558d8d4a6bd92aeb9dae5c6a18514e90e97dc18
+            <artifactId>httpclient</artifactId>
         </dependency>
         <!-- jackson-databind --> 
         <!-- obligatoire pour convertir les objets JAVA en données JSON -->
