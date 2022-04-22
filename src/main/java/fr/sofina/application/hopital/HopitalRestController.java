@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -61,7 +62,7 @@ public class HopitalRestController {
         logger.info("Trouver toutes les spécialités présentes dans un hôpital.");
         return specialiteFacade.findAllSpecialiteByCodeHopital(code);
     }
-    
+
     // ----- Rechercher tous les hopitaux ayant une spécialité ET des lits disponibles -----
     @RequestMapping("/api/medhead/hopital/specialite/{code}")
     @ResponseStatus(HttpStatus.OK) // 200 OK
@@ -70,15 +71,13 @@ public class HopitalRestController {
         return hopitalFacade.findAllBySpecialiteLitDisponible(code);
     }
 
-    /*
     // Rechercher l'hôpital le plus proche pour un patient ayant un incident d'un type précis (cardiologie)
-    // ET que l'urgence soit localisée près d'un hôpital disposant de ce soin
-    // ET qu'un lit soit disponible pour être réservé     
-    @RequestMapping(value = "/api/medhead/specialite/{code}/hopital")
-    @ResponseStatus(HttpStatus.OK) // 200 OK
-    public Optional findOne(@PathVariable("code") int code) {
+    // ET que l'urgence soit localisée près d'un hôpital disposant de ce soin ET qu'un lit soit disponible pour être réservé
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/medhead/evenement") // 201 Created  
+    @ResponseStatus(HttpStatus.CREATED)
+    public Hopital creerEvenement() {
         logger.info("Recherche en cours de l'hôpital le plus proche...");
-        return Optional.empty();
+        return null;
     }
-     */
 }
