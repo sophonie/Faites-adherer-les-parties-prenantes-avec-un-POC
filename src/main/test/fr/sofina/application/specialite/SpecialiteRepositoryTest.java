@@ -1,11 +1,15 @@
 package fr.sofina.application.specialite;
 
 import fr.sofina.application.SofinaApplication;
+import fr.sofina.application.groupespecialite.GroupeSpecialite;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RunWith(Runner.class)
 @SpringBootTest(classes = SofinaApplication.class)
 public class SpecialiteRepositoryTest {
-
+    
+    private final Logger logger = LoggerFactory.getLogger(SpecialiteRepositoryTest.class);
+    
     @Autowired
     @Qualifier("specialiteRepository")
     private SpecialiteRepository specialiteRepository;
@@ -26,18 +32,20 @@ public class SpecialiteRepositoryTest {
     @DisplayName("Trouver une spécialité par son code")
     void testFindOneSpecialiteById() {
         final Long code = 24L;        
-        final Short code_groupe_specialite = 5;
+        final GroupeSpecialite code_groupe_specialite = new GroupeSpecialite();
+        code_groupe_specialite.setCodeGroupeSpecialite(5L);
 
-        final Specialite actual = new Specialite();        
+        final Specialite actual = new Specialite();
         actual.setCodespecialite(code);
-        actual.setNom("Pharmacologie clinique et thérapeutique");
-        actual.setGroupeSpecialite(code_groupe_specialite);
+        actual.setNom("Pharmacologie clinique et thérapeutique");        
 
         final Specialite expected = specialiteRepository.findOneSpecialiteById(actual.getCodespecialite());
 
-        assertThat(expected.getCodespecialite()).isEqualTo(actual.getCodespecialite());
+        assertThat(expected.getCodespecialite()).isEqualTo(actual.getCodespecialite()); // expected, actual
+        logger.info("Code de la spécialité  [" + expected.getCodespecialite() + "]");        
         assertThat(expected.getNom()).isEqualTo(actual.getNom());
-        assertThat(expected.getGroupeSpecialite()).isEqualTo(actual.getGroupeSpecialite());
+        logger.info("Nom de la spécialité  [" + expected.getNom() + "]");
+        assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), code_groupe_specialite.getCodeGroupeSpecialite());
+        logger.info("Code groupe de la spécialité  [" + expected.getGroupeSpecialite().getCodeGroupeSpecialite() + "]");
     }
-
 }
