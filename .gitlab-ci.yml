@@ -1,3 +1,11 @@
+services:
+  - postgres:12.9
+
+variables:
+  POSTGRES_DB: bddmedhead
+  POSTGRES_USER: sophonie
+  POSTGRES_PASSWORD: qvmsbtkr
+
 image: maven:latest
 stages:          
   - build
