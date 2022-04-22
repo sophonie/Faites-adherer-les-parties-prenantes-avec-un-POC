@@ -1,6 +1,7 @@
 package fr.sofina.application.specialite;
 
 import fr.sofina.application.SofinaApplication;
+import fr.sofina.application.groupespecialite.GroupeSpecialite;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,18 +32,21 @@ public class SpecialiteFacadeTest {
         SpecialiteService specialiteFacade = new SpecialiteFacade(specialiteRepository);
         final List<Specialite> specialites = new ArrayList<>(); // expected
 
-        final Long codespecialite1 = 1L;        
+        final Long codespecialite1 = 1L;
         final String nomspecialite1 = "Anesthésie";
-        final Short codegroupespecialite1 = 1;
+        final GroupeSpecialite codegroupespecialite1 = new GroupeSpecialite();
+        codegroupespecialite1.setCodeGroupeSpecialite(1L);
 
-        final Long codespecialite2 = 1L;        
+        final Long codespecialite2 = 1L;
         final String nomspecialite2 = "Soins intensifs";
-        final Short codegroupespecialite2 = 1;
+        final GroupeSpecialite codegroupespecialite2 = new GroupeSpecialite();
+        codegroupespecialite2.setCodeGroupeSpecialite(1L);
 
         final Long codespecialite3 = 17L;
-        
+
         final String nomspecialite3 = "Médecine d'urgence";
-        final Short codegroupespecialite3 = 4;
+        final GroupeSpecialite codegroupespecialite3 = new GroupeSpecialite();
+        codegroupespecialite3.setCodeGroupeSpecialite(4L);
 
         specialites.add(new Specialite(codespecialite1, nomspecialite1, codegroupespecialite1));
         specialites.add(new Specialite(codespecialite2, nomspecialite2, codegroupespecialite2));
@@ -53,22 +57,22 @@ public class SpecialiteFacadeTest {
                 .stream()
                 .collect(Collectors.toList()); // expected        
 
-        assertEquals(specialites.get(0).getNom(), list.get(0).getNom());
-        assertEquals(specialites.get(1).getNom(), list.get(1).getNom());
-        assertEquals(specialites.get(2).getNom(), list.get(2).getNom());
-
+        assertEquals(list.get(0).getNom(), specialites.get(0).getNom()); // expected, actual
+        assertEquals(list.get(1).getNom(), specialites.get(1).getNom());
+        assertEquals(list.get(2).getNom(), specialites.get(2).getNom());
     }
 
     @Test
     public void testFindOneSpecialiteById() {
-        final Long codespecialite = 1L;        
+        final Long codespecialite = 1L;
         final String nom_specialite = "Anesthésie";
-        final Short code_groupe_specialite = 1;
+        final GroupeSpecialite groupe_specialite = new GroupeSpecialite();
+        groupe_specialite.setCodeGroupeSpecialite(1L);
         Specialite expected = specialiteRepository.findOneSpecialiteById(codespecialite);
-
-        assertEquals(codespecialite, expected.getCodespecialite());
-        assertEquals(nom_specialite, expected.getNom());
-        assertEquals(code_groupe_specialite, expected.getGroupeSpecialite()); // actual, expected
+        expected.setGroupeSpecialite(new GroupeSpecialite(1L));
+        
+        assertEquals(expected.getCodespecialite(), codespecialite); // expected, actual
+        assertEquals(expected.getNom(), nom_specialite);        
+        assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), groupe_specialite.getCodeGroupeSpecialite());
     }
-
 }
