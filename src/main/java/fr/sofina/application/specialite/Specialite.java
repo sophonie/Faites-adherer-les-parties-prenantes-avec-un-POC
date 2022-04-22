@@ -1,12 +1,15 @@
 package fr.sofina.application.specialite;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.sofina.application.groupespecialite.GroupeSpecialite;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -25,23 +28,20 @@ public class Specialite implements Serializable {
     @NotBlank
     private String nom;
 
-    @Column(name = "code_groupe_specialite", nullable = false)
-    private Short groupespecialite;
+    @JoinColumn(name ="code_groupe_specialite")
+    @ManyToOne
+    private GroupeSpecialite code_groupe_specialite;
 
     public Specialite() {
     }
     
-    public Specialite(Long codespecialite) {
-        this.codespecialite = codespecialite;
-    }
-
     public Specialite(
             @JsonProperty("code_specialite") final Long codespecialite,
             @JsonProperty("nom_specialite") final String nom,
-            @JsonProperty("code_groupe_specialite") final Short groupespecialite) {
+            @JsonProperty("code_groupe_specialite") final GroupeSpecialite code_groupe_specialite) {
         this.codespecialite = codespecialite;
         this.nom = nom;
-        this.groupespecialite = groupespecialite;
+        this.code_groupe_specialite = code_groupe_specialite;
     }
 
     public Long getCodespecialite() {
@@ -52,8 +52,8 @@ public class Specialite implements Serializable {
         return nom;
     }
 
-    public Short getGroupeSpecialite() {
-        return groupespecialite;
+    public GroupeSpecialite getGroupeSpecialite() {
+        return code_groupe_specialite;
     }
 
     public void setCodespecialite(Long codespecialite) {
@@ -64,7 +64,7 @@ public class Specialite implements Serializable {
         this.nom = nom;
     }
 
-    public void setGroupeSpecialite(Short groupespecialite) {
-        this.groupespecialite = groupespecialite;
+    public void setGroupeSpecialite(GroupeSpecialite code_groupe_specialite) {
+        this.code_groupe_specialite = code_groupe_specialite;
     }
 }
