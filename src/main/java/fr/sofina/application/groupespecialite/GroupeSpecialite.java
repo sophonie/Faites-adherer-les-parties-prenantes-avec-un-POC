@@ -1,5 +1,6 @@
 package fr.sofina.application.groupespecialite;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.sofina.application.specialite.Specialite;
 import java.io.Serializable;
 import java.util.List;
@@ -26,17 +27,20 @@ public class GroupeSpecialite implements Serializable {
     @Column(name = "nom_groupe_specialite", nullable = false)
     @NotBlank
     private String nom;
-    
-    @OneToMany(mappedBy = "code_groupe_specialite")
+
+    @OneToMany(mappedBy = "groupe_specialite")
     private List<Specialite> specialites;
 
     public GroupeSpecialite() {
     }
 
-    public GroupeSpecialite(Long code_groupe_specialite) {
+    public GroupeSpecialite(
+            @JsonProperty("code_groupe_specialite") Long code_groupe_specialite,
+            @JsonProperty("nom_groupe_specialite") String nom) {
         this.code_groupe_specialite = code_groupe_specialite;
+        this.nom = nom;
     }
-    
+
     public Long getCodeGroupeSpecialite() {
         return code_groupe_specialite;
     }

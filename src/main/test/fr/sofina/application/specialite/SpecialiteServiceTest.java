@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,17 +18,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Configurable
 @RunWith(Runner.class)
 @SpringBootTest(classes = SofinaApplication.class)
-public class SpecialiteFacadeTest {
+public class SpecialiteServiceTest { // Tests unitaires couche service avec Mockito et AssertJ
 
     @Autowired
-    @Qualifier("specialiteRepository")
-    private SpecialiteRepository specialiteRepository;
+    private SpecialiteService specialiteFacade;
 
     @Test
     public void testFindAllSpecialiteByCodeHopital() {
         System.out.println("findAllSpecialiteByCodeHopital");
         Long code = 1L;
-        SpecialiteService specialiteFacade = new SpecialiteFacade(specialiteRepository);
         final List<Specialite> specialites = new ArrayList<>(); // expected
 
         final Long codespecialite1 = 1L;
@@ -68,11 +65,12 @@ public class SpecialiteFacadeTest {
         final String nom_specialite = "Anesthésie";
         final GroupeSpecialite groupe_specialite = new GroupeSpecialite();
         groupe_specialite.setCodeGroupeSpecialite(1L);
-        Specialite expected = specialiteRepository.findOneSpecialiteById(codespecialite);
-        expected.setGroupeSpecialite(new GroupeSpecialite(1L));
-        
-        assertEquals(expected.getCodespecialite(), codespecialite); // expected, actual
-        assertEquals(expected.getNom(), nom_specialite);        
+        groupe_specialite.setNom("Anesthésie");
+        Specialite expected = specialiteFacade.findOneSpecialiteById(codespecialite);
+        expected.setGroupeSpecialite(new GroupeSpecialite(groupe_specialite.getCodeGroupeSpecialite(), groupe_specialite.getNom()));
+
+        assertEquals(expected.getCode_specialite(), codespecialite); // expected, actual
+        assertEquals(expected.getNom(), nom_specialite);
         assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), groupe_specialite.getCodeGroupeSpecialite());
     }
 }

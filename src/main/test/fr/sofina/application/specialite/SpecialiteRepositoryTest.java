@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Configurable
 @RunWith(Runner.class)
 @SpringBootTest(classes = SofinaApplication.class)
-public class SpecialiteRepositoryTest {
+public class SpecialiteRepositoryTest { // test intégration
     
     private final Logger logger = LoggerFactory.getLogger(SpecialiteRepositoryTest.class);
     
@@ -36,13 +36,13 @@ public class SpecialiteRepositoryTest {
         code_groupe_specialite.setCodeGroupeSpecialite(5L);
 
         final Specialite actual = new Specialite();
-        actual.setCodespecialite(code);
+        actual.setCode_specialite(code);
         actual.setNom("Pharmacologie clinique et thérapeutique");        
 
-        final Specialite expected = specialiteRepository.findOneSpecialiteById(actual.getCodespecialite());
+        final Specialite expected = specialiteRepository.findOneSpecialiteById(actual.getCode_specialite());
 
-        assertThat(expected.getCodespecialite()).isEqualTo(actual.getCodespecialite()); // expected, actual
-        logger.info("Code de la spécialité  [" + expected.getCodespecialite() + "]");        
+        assertThat(expected.getCode_specialite()).isEqualTo(actual.getCode_specialite()); // expected, actual
+        logger.info("Code de la spécialité  [" + expected.getCode_specialite() + "]");        
         assertThat(expected.getNom()).isEqualTo(actual.getNom());
         logger.info("Nom de la spécialité  [" + expected.getNom() + "]");
         assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), code_groupe_specialite.getCodeGroupeSpecialite());

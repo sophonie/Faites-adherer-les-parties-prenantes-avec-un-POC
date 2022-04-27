@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RunWith(Runner.class)
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = SofinaApplication.class)
-public class HopitalFacadeTest { // Tests intégration couche service avec Mockito et AssertJ
+public class HopitalServiceTest { // Tests unitaires couche service avec Mockito et AssertJ
 
     @Mock
     private HopitalService hopitalFacade;
@@ -65,5 +65,4 @@ public class HopitalFacadeTest { // Tests intégration couche service avec Mocki
         // verify
         verify(hopitalFacade).findAllBySpecialiteLitDisponible(codespecialite);
     }
-
 }

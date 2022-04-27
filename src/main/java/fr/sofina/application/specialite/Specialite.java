@@ -22,7 +22,7 @@ public class Specialite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code_specialite", unique = true, nullable = false)
-    private Long codespecialite;
+    private Long code_specialite;
 
     @Column(name = "nom_specialite", nullable = false)
     @NotBlank
@@ -30,7 +30,7 @@ public class Specialite implements Serializable {
 
     @JoinColumn(name ="code_groupe_specialite")
     @ManyToOne
-    private GroupeSpecialite code_groupe_specialite;
+    private GroupeSpecialite groupe_specialite;
 
     public Specialite() {
     }
@@ -38,14 +38,14 @@ public class Specialite implements Serializable {
     public Specialite(
             @JsonProperty("code_specialite") final Long codespecialite,
             @JsonProperty("nom_specialite") final String nom,
-            @JsonProperty("code_groupe_specialite") final GroupeSpecialite code_groupe_specialite) {
-        this.codespecialite = codespecialite;
+            @JsonProperty("groupe_specialite") final GroupeSpecialite groupe_specialite) {
+        this.code_specialite = codespecialite;
         this.nom = nom;
-        this.code_groupe_specialite = code_groupe_specialite;
+        this.groupe_specialite = groupe_specialite;
     }
 
-    public Long getCodespecialite() {
-        return codespecialite;
+    public Long getCode_specialite() {
+        return code_specialite;
     }
 
     public String getNom() {
@@ -53,11 +53,11 @@ public class Specialite implements Serializable {
     }
 
     public GroupeSpecialite getGroupeSpecialite() {
-        return code_groupe_specialite;
+        return groupe_specialite;
     }
 
-    public void setCodespecialite(Long codespecialite) {
-        this.codespecialite = codespecialite;
+    public void setCode_specialite(Long code_specialite) {
+        this.code_specialite = code_specialite;
     }
 
     public void setNom(String nom) {
@@ -65,6 +65,6 @@ public class Specialite implements Serializable {
     }
 
     public void setGroupeSpecialite(GroupeSpecialite code_groupe_specialite) {
-        this.code_groupe_specialite = code_groupe_specialite;
+        this.groupe_specialite = code_groupe_specialite;
     }
 }

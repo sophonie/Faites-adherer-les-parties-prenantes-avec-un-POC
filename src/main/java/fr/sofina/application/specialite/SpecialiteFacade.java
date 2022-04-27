@@ -20,7 +20,7 @@ public class SpecialiteFacade implements SpecialiteService {
         this.specialiteRepository = specialiteRepository;
     }
 
-    @Override
+    @Override    
     public List<Specialite> findAllSpecialiteByCodeHopital(Long code) { // code hopital        
         final List<Specialite> hopitaux = new ArrayList<>();
         Objects.requireNonNull(specialiteRepository);
@@ -30,7 +30,7 @@ public class SpecialiteFacade implements SpecialiteService {
             Collection<Specialite> collection = specialiteRepository.findAllSpecialiteByCodeHopital(code);
             for (Specialite specialite : collection) {
                 final Specialite s = new Specialite();
-                s.setCodespecialite(specialite.getCodespecialite());
+                s.setCode_specialite(specialite.getCode_specialite());
                 s.setNom(specialite.getNom());
                 s.setGroupeSpecialite(specialite.getGroupeSpecialite());
 

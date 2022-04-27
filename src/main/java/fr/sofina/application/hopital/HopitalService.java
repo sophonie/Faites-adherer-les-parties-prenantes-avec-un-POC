@@ -12,5 +12,8 @@ public interface HopitalService {
     List<Hopital> findByNom(String nom);        
     // implémenter toutes les méthodes pour les tests
     Collection<Hopital> findAllBySpecialiteLitDisponible(Long code);
+    //Optional<Hopital> findHopital(@NotNull Long code); // code spécialite
+    // si l'Optional n'est pas vide alors c'est qu'un hopital a été trouvé, et il faut donc :
+    // - décrémenter un lit de cet hôpital
     
 }

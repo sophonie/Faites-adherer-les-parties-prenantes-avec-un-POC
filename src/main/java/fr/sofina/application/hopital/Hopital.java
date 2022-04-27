@@ -26,12 +26,15 @@ public class Hopital implements Serializable {
     private String nom;
 
     @Column(name = "latitude_hopital", nullable = false)
+    @NotBlank
     private float latitude;
 
     @Column(name = "longitude_hopital", nullable = false)
+    @NotBlank
     private float longitude;
 
     @Column(name = "lits_disponibles", nullable = false)
+    @NotBlank
     private int litsDisponibles;
 
     public Hopital() {
@@ -57,7 +60,7 @@ public class Hopital implements Serializable {
     public void setCodehopital(Long codehopital) {
         this.codehopital = codehopital;
     }
-    
+
     public Long getCodehopital() {
         return codehopital;
     }

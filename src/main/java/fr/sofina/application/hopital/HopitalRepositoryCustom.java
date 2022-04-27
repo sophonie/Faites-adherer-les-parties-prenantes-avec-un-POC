@@ -21,10 +21,11 @@ public interface HopitalRepositoryCustom extends JpaRepository<Hopital, Long> {
 
     @Transactional
     @Query(value = "SELECT "
-            + "h.code_hopital, h.nom_hopital, h.latitude_hopital, h.longitude_hopital, h.lits_disponibles "
-            + "FROM  gestion_urgence.tbhopital_possede_specialite p "
+            + "	h.code_hopital, h.nom_hopital, h.latitude_hopital, "
+            + "	h.longitude_hopital, h.lits_disponibles "
+            + "FROM   gestion_urgence.tbhopital h "
+            + "INNER JOIN gestion_urgence.tbhopital_possede_specialite p ON p.code_hopital = h.code_hopital "
             + "INNER JOIN gestion_urgence.tbspecialite s ON s.code_specialite = p.code_specialite "
-            + "INNER JOIN gestion_urgence.tbhopital h ON h.code_hopital = p.code_hopital "
-            + "WHERE s.code_specialite = ?1 AND h.lits_disponibles > 0", nativeQuery = true)
+            + "WHERE s.code_specialite = 17 AND h.lits_disponibles > 0", nativeQuery = true)
     Collection<Hopital> findAllBySpecialiteLitDisponible(final Long code);
 }

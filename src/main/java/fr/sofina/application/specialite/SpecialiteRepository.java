@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface SpecialiteRepository extends JpaRepository<Specialite, Long> {
 
     @Transactional
-    @Query(value = "SELECT code_specialite, nom_specialite, code_groupe_specialite "
+    @Query(value = "SELECT s.code_specialite, s.nom_specialite, s.code_groupe_specialite "
             + "FROM gestion_urgence.tbspecialite s WHERE s.code_specialite = ?1", nativeQuery = true)
     Specialite findOneSpecialiteById(final Long code);
 
