@@ -50,15 +50,15 @@ public class HopitalServiceTest { // Tests unitaires couche service avec Mockito
     @Test
     @DisplayName("Vérifier si un hôpital a une spécialité et des lits disponibles")
     void testFindAllHopitalBySpecialiteWithLitDisponible() {
-        final Long codespecialite = 17L;
+        final Long codespecialite = 21L;
         final List<Hopital> hopitaux = new ArrayList<>();
         final Long code1 = 1L;
-        final Long code2 = 9L;
-        final Long code3 = 4L;
+        final Long code2 = 4L;
+        final Long code3 = 9L;
         
         hopitaux.add(new Hopital(code1, "Hôpital Haut-Lévêque", 44.7844478f, -0.6635059f, 9));
-        hopitaux.add(new Hopital(code2, "Hôpital Saint-André de Bordeaux", 52.5686517f, -0.5798204f, 7));
-        hopitaux.add(new Hopital(code3, "Polyclinique Lormont", 47.6398521f, -0.6159895f, 3));
+        hopitaux.add(new Hopital(code2, "Polyclinique Lormont", 47.6398521f, -0.6159895f, 3));
+        hopitaux.add(new Hopital(code3, "Hôpital Saint-André de Bordeaux", 52.5686517f, -0.5798204f, 7));
         // when ... then
         when(hopitalFacade.findAllBySpecialiteLitDisponible(codespecialite)).thenReturn(hopitaux);
         Assertions.assertEquals(3, hopitalFacade.findAllBySpecialiteLitDisponible(codespecialite).size());        

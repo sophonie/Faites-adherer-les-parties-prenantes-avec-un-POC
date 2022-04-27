@@ -39,7 +39,7 @@ public class SpecialiteServiceTest { // Tests unitaires couche service avec Mock
         final GroupeSpecialite codegroupespecialite2 = new GroupeSpecialite();
         codegroupespecialite2.setCodeGroupeSpecialite(1L);
 
-        final Long codespecialite3 = 17L;
+        final Long codespecialite3 = 21L; // Cardiologie
 
         final String nomspecialite3 = "Médecine d'urgence";
         final GroupeSpecialite codegroupespecialite3 = new GroupeSpecialite();

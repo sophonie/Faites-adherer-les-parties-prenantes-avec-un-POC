@@ -41,7 +41,7 @@ public class EvenementServiceTest {
         final ZoneId zonedId = ZoneId.of("Europe/Paris");
         final LocalDate date = LocalDate.now(zonedId);
         final Specialite code_specialite = new Specialite();
-        code_specialite.setCode_specialite(17L);
+        code_specialite.setCode_specialite(21L);
 
         final Evenement evenement = new Evenement();
         evenement.setDateEvenement(date);

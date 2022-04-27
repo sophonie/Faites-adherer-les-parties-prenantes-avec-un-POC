@@ -49,7 +49,7 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
         hopitaux.add(new Hopital("Polyclinique Lormont"));
         // when
         final List<Hopital> list = hopitalRepository
-                .findAllBySpecialiteLitDisponible(code_specialite)
+                .findHopitauxBySpecialiteWithLitDisponible(code_specialite)
                 .stream()
                 .collect(Collectors.toList()); // expected        
         // then

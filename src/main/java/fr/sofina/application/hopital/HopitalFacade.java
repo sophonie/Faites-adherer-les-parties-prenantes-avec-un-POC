@@ -65,6 +65,6 @@ public class HopitalFacade implements HopitalService {
         if(Objects.isNull(code)) {
             throw new HopitalIntrouvableException("Enregistrement introuvable dans la base de données");
         }
-        return hopitalRepository.findAllBySpecialiteLitDisponible(code);
+        return hopitalRepository.findHopitauxBySpecialiteWithLitDisponible(code);
     }    
 }

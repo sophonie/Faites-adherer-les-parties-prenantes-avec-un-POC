@@ -95,7 +95,6 @@ public class HopitalRestController {
     // Rechercher l'hôpital le plus proche pour un patient ayant un incident d'un type précis (cardiologie) ET que 
     // l'urgence soit localisée près d'un hôpital disposant de ce soin ET qu'un lit soit disponible pour être réservé    
     // ----------------------------------------------------------------------------------------------------------------
-    
     // ----------------------------------------------- créer l'incident -----------------------------------------------
     // la création de l'incident va ajouter l'événement et le patient en DB
     @RequestMapping(value = "/api/medhead/incident", method = RequestMethod.POST,
@@ -117,7 +116,13 @@ public class HopitalRestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
+    // proposer l'hôpital le plus proche disposant de l'offre de soin
+    // décrémenter de 1 le nombre de lits de cet hôpital
+    // alimenter la table d'association tbhopital_possede_incident
+    // tracer l'incident dans la table tbjournal_incident
+    
+    
     // ------------------------------------------ proposer l'hôpital --------------------------------------------------  
     // ------------------------------------- Publier un événement pour réserver un lit --------------------------------
     @RequestMapping(value = "/api/medhead/hopital/evenement", produces = MediaType.TEXT_PLAIN_VALUE)
