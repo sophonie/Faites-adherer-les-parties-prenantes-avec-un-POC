@@ -58,15 +58,6 @@ public class EvenementFacade implements EvenementService {
     }
 
     Long creerLigneJournalIncident(Long code_hopital) {
-        /*
-            "patient": {
-            "nom_patient": "Macias",
-            "prenom_patient": "Dorothée",
-            "datenaissance_patient": "07/11/2021",
-            "genre_patient": "Agender",
-            "no_ss_patient": 9091433491
-        }
-         */
         Objects.requireNonNull(code_hopital);
         final JournalIncident journal = new JournalIncident();
         journal.setCodeIncident(hopitalRepository.findByCodeIncident(code_hopital));
@@ -88,10 +79,8 @@ public class EvenementFacade implements EvenementService {
         incident.setCodeIncident(incidentRepository.findLastId()); // code du dernier incident 
         final Long code_hopital = hopitalRepository.findByCodeHopital(incident.getCodeIncident());
         logger.info("tbhopital [code_hopital] : " + code_hopital);
-        // TODO : 5b. créer une ligne dans la table de journalisation tbjournal_incident        
         final Long callback = creerLigneJournalIncident(code_hopital);
         logger.info("tbjournal_incident [code_incident] : " + callback);
-        // TODO : 6. décrémenter le nombre de lits de cet hôpital
         hopitalRepository.reserverLitHopital(code_hopital);
         logger.info("Réservation lit [code_hopital, code_incident] : [" + code_hopital + ", " + incident.getCodeIncident() + "]");
 
