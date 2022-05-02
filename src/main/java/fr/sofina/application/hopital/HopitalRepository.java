@@ -9,4 +9,6 @@ public interface HopitalRepository extends JpaRepository<Hopital, Long>, Hopital
 
     List<Hopital> findByNom(String nom);
     
+    
+    
 }

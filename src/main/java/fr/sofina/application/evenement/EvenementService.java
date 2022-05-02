@@ -7,5 +7,6 @@ public interface EvenementService {
 
     Evenement creerEvenement(Evenement evenement);
 
-    String publierEvenement();
+    String publierEvenement(); // code de l'incident
+    
 }

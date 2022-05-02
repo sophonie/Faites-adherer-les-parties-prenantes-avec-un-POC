@@ -41,15 +41,15 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
     @DisplayName("Vérifier si un hôpital a une spécialité et des lits disponibles")
     void testFindAllBySpecialiteLitDisponible() {
 
-        final Long code_specialite = 17L;
+        final Long code_specialite = 21L;
         // given
         List<Hopital> hopitaux = new ArrayList<>();
         hopitaux.add(new Hopital("Hôpital Haut-Lévêque")); // actual
-        hopitaux.add(new Hopital("Hôpital Saint-André de Bordeaux"));
         hopitaux.add(new Hopital("Polyclinique Lormont"));
+        hopitaux.add(new Hopital("Hôpital Saint-André de Bordeaux"));
         // when
         final List<Hopital> list = hopitalRepository
-                .findHopitauxBySpecialiteWithLitDisponible(code_specialite)
+                .findHopitauxBySpecialite(code_specialite)
                 .stream()
                 .collect(Collectors.toList()); // expected        
         // then

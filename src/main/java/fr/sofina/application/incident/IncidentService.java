@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface IncidentService {
 
-    Incident creerIncident(Incident incident);    
+    Long creerIncident(Incident incident); // retourne le code de l'incident
 
 }

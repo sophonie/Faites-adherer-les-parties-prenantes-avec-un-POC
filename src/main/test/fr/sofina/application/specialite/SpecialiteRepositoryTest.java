@@ -36,13 +36,13 @@ public class SpecialiteRepositoryTest { // test intégration
         code_groupe_specialite.setCodeGroupeSpecialite(5L);
 
         final Specialite actual = new Specialite();
-        actual.setCode_specialite(code);
+        actual.setCodeSpecialite(code);
         actual.setNom("Pharmacologie clinique et thérapeutique");        
 
-        final Specialite expected = specialiteRepository.findOneSpecialiteById(actual.getCode_specialite());
+        final Specialite expected = specialiteRepository.findOneSpecialiteById(actual.getCodeSpecialite());
 
-        assertThat(expected.getCode_specialite()).isEqualTo(actual.getCode_specialite()); // expected, actual
-        logger.info("Code de la spécialité  [" + expected.getCode_specialite() + "]");        
+        assertThat(expected.getCodeSpecialite()).isEqualTo(actual.getCodeSpecialite()); // expected, actual
+        logger.info("Code de la spécialité  [" + expected.getCodeSpecialite() + "]");        
         assertThat(expected.getNom()).isEqualTo(actual.getNom());
         logger.info("Nom de la spécialité  [" + expected.getNom() + "]");
         assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), code_groupe_specialite.getCodeGroupeSpecialite());

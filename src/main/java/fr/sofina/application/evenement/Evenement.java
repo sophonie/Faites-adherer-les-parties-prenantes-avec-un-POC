@@ -22,10 +22,10 @@ public class Evenement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_evenement", unique = true, nullable = false)
+    @Column(name =  "code_evenement", unique = true, nullable = false)
     private Long code_evenement;
 
-    @Column(name = "date_evenement", nullable = false) 
+    @Column(name = "date_evenement") 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate date_evenement;
 
@@ -36,10 +36,10 @@ public class Evenement implements Serializable {
     public Evenement() {
     }
 
-    public Evenement(                        
-            @JsonProperty("date_evenement") LocalDate date_evenement,
+    public Evenement(
+            @JsonProperty("code_evenement") Long code_evenement,            
             @JsonProperty("specialite") Specialite specialite) {        
-        this.date_evenement = date_evenement;
+        this.code_evenement = code_evenement;        
         this.specialite = specialite;
     }
     
@@ -54,6 +54,12 @@ public class Evenement implements Serializable {
     public Specialite getCodeGroupeSpecialite() {
         return specialite;
     }
+
+    public Specialite getSpecialite() {
+        return specialite;
+    }
+    
+    
 
     public void setCodeEvenement(Long code_evenement) {
         this.code_evenement = code_evenement;

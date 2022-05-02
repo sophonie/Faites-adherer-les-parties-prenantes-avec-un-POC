@@ -18,24 +18,28 @@ public final class HopitalPossedeSpecialite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CODE_HOPITAL", nullable = false)
+    @JoinColumn(name = "code_hopital", nullable = false)
     @NotBlank
-    private Long codehopital;
+    private Long code_hopital;
 
     @ManyToOne
-    @JoinColumn(name = "CODE_SPECIALITE", nullable = false)
+    @JoinColumn(name = "code_specialite", nullable = false)
     @NotBlank
     private Long codespecialite;
 
     public HopitalPossedeSpecialite() {
     }
 
-    public Long getCodehopital() {
-        return codehopital;
+    public HopitalPossedeSpecialite(Long codespecialite) {
+        this.codespecialite = codespecialite;
+    }
+    
+    public Long getCodeHopital() {
+        return code_hopital;
     }
 
     public Long getCodespecialite() {

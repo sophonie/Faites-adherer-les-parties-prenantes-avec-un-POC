@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Configurable
 @RunWith(Runner.class)
 @SpringBootTest(classes = SofinaApplication.class)
-public class SpecialiteServiceTest { // Tests unitaires couche service avec Mockito et AssertJ
+public class SpecialiteServiceTest { // Tests unitaires couche service
 
     @Autowired
     private SpecialiteService specialiteFacade;
@@ -41,9 +41,9 @@ public class SpecialiteServiceTest { // Tests unitaires couche service avec Mock
 
         final Long codespecialite3 = 21L; // Cardiologie
 
-        final String nomspecialite3 = "Médecine d'urgence";
+        final String nomspecialite3 = "Cardiologie";
         final GroupeSpecialite codegroupespecialite3 = new GroupeSpecialite();
-        codegroupespecialite3.setCodeGroupeSpecialite(4L);
+        codegroupespecialite3.setCodeGroupeSpecialite(5L);
 
         specialites.add(new Specialite(codespecialite1, nomspecialite1, codegroupespecialite1));
         specialites.add(new Specialite(codespecialite2, nomspecialite2, codegroupespecialite2));
@@ -69,7 +69,7 @@ public class SpecialiteServiceTest { // Tests unitaires couche service avec Mock
         Specialite expected = specialiteFacade.findOneSpecialiteById(codespecialite);
         expected.setGroupeSpecialite(new GroupeSpecialite(groupe_specialite.getCodeGroupeSpecialite(), groupe_specialite.getNom()));
 
-        assertEquals(expected.getCode_specialite(), codespecialite); // expected, actual
+        assertEquals(expected.getCodeSpecialite(), codespecialite); // expected, actual
         assertEquals(expected.getNom(), nom_specialite);
         assertEquals(expected.getGroupeSpecialite().getCodeGroupeSpecialite(), groupe_specialite.getCodeGroupeSpecialite());
     }

@@ -1,12 +1,17 @@
 package fr.sofina.application.hopital;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.sofina.application.specialite.Specialite;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -36,7 +41,10 @@ public class Hopital implements Serializable {
     @Column(name = "lits_disponibles", nullable = false)
     @NotBlank
     private int litsDisponibles;
-
+    
+    @OneToMany(mappedBy = "code_specialite", fetch = FetchType.EAGER)
+    private List<Specialite> specialites = new ArrayList<>();
+    
     public Hopital() {
     }
 
@@ -80,4 +88,13 @@ public class Hopital implements Serializable {
     public int getLitsDisponibles() {
         return litsDisponibles;
     }
+
+    public List<Specialite> getSpecialites() {
+        return specialites;
+    }
+
+    public void setSpecialites(List<Specialite> specialites) {
+        this.specialites = specialites;
+    }
+    
 }

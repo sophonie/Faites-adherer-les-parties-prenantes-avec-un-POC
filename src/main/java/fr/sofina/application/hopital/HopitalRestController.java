@@ -4,7 +4,6 @@ import fr.sofina.application.evenement.EvenementService;
 import fr.sofina.application.incident.Incident;
 import fr.sofina.application.incident.IncidentFacade;
 import fr.sofina.application.incident.IncidentService;
-import fr.sofina.application.patient.PatientService;
 import fr.sofina.application.specialite.Specialite;
 import fr.sofina.application.specialite.SpecialiteService;
 import java.util.Collection;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,20 +37,16 @@ public class HopitalRestController {
     @Qualifier("evenementFacade")
     private final EvenementService evenementFacade;
 
-    @Qualifier("patientFacade")
-    private final PatientService patientFacade;
-
     @Qualifier("incidentFacade")
     private final IncidentService incidentFacade;
 
     @Autowired
     public HopitalRestController(
             HopitalService hopitalFacade, SpecialiteService specialiteFacade,
-            EvenementService evenementFacade, PatientService patientFacade, IncidentFacade incidentFacade) {
+            EvenementService evenementFacade, IncidentFacade incidentFacade) {
         this.hopitalFacade = hopitalFacade;
         this.specialiteFacade = specialiteFacade;
         this.evenementFacade = evenementFacade;
-        this.patientFacade = patientFacade;
         this.incidentFacade = incidentFacade;
     }
 
@@ -60,7 +54,7 @@ public class HopitalRestController {
     @RequestMapping(value = "/api/medhead/lits/{valeur}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK) // 200 OK    
-    public int countLitsDisponibles(@PathVariable("valeur") int valeur) {
+    public int countLitsDisponibles(@PathVariable("valeur") Long valeur) {
         logger.info("Compter le nombre de lits disponibles dans un hôpital.");
         return hopitalFacade.countLitsDisponibles(valeur);
     }
@@ -88,7 +82,7 @@ public class HopitalRestController {
     @ResponseStatus(HttpStatus.OK) // 200 OK
     public Collection<Hopital> findAllBySpecialiteLitDisponible(@PathVariable("code") Long code) { // code spécialite
         logger.info("Trouver tous les hôpitaux ayant une spécialité ET des lits disponibles.");
-        return hopitalFacade.findAllBySpecialiteLitDisponible(code);
+        return hopitalFacade.findHopitauxBySpecialite(code);
     }
 
     // ----------------------------------------------------------------------------------------------------------------
@@ -99,37 +93,30 @@ public class HopitalRestController {
     // la création de l'incident va ajouter l'événement et le patient en DB
     @RequestMapping(value = "/api/medhead/incident", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Incident> creerIncident(@RequestBody Incident incident) {
+    @ResponseStatus(HttpStatus.CREATED) // 201 CREATED
+    public Long creerIncident(@RequestBody Incident incident) {
         if (Objects.isNull(incident)) {
             throw new IllegalArgumentException("L'incident passé en paramètre doit être un objet référencé.");
         }
-        try {
-            final Incident incidentAjoute = incidentFacade.creerIncident(incident);
+        return incidentFacade.creerIncident(incident);
+    }
 
-            if (Objects.isNull(incidentAjoute)) {
-                return ResponseEntity.noContent().build();
-            }
+    // ----------------------------- proposition de l'hôpital le plus proche ------------------------------------------ 
+    @RequestMapping(value = "/api/v1/medhead/hopital/{code}", method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseStatus(HttpStatus.OK) // 200 OK    
+    public String findHopital(@PathVariable("code") Long code) { // code incident
 
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        logger.info("Recherche en cours de l'hôpital le plus proche proposant l'offre de soin.");
+
+        return hopitalFacade.findHopital(code);
     }
     
-    // proposer l'hôpital le plus proche disposant de l'offre de soin
-    // décrémenter de 1 le nombre de lits de cet hôpital
-    // alimenter la table d'association tbhopital_possede_incident
-    // tracer l'incident dans la table tbjournal_incident
-    
-    
-    // ------------------------------------------ proposer l'hôpital --------------------------------------------------  
-    // ------------------------------------- Publier un événement pour réserver un lit --------------------------------
-    @RequestMapping(value = "/api/medhead/hopital/evenement", produces = MediaType.TEXT_PLAIN_VALUE)
+    // ----------------------------- Publication de l'événement : réservation d'un lit --------------------------------
+    @RequestMapping(value = "/api/medhead/evenement", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseStatus(HttpStatus.OK) // 200 OK
     public String publierEvenement() {
         logger.info("Réservation du lit pour le patient admis aux urgences.");
         return evenementFacade.publierEvenement();
     }
-
 }

@@ -37,7 +37,7 @@ public class HopitalServiceTest { // Tests unitaires couche service avec Mockito
     @Test
     @DisplayName("Compter le nombre de lits disponibles dans un hôpital")
     void testLitsDisponibles() {
-        final int code = 7;
+        final Long code = 7L;
 
         // when ... then
         when(hopitalFacade.countLitsDisponibles(code)).thenReturn(5);
@@ -60,9 +60,9 @@ public class HopitalServiceTest { // Tests unitaires couche service avec Mockito
         hopitaux.add(new Hopital(code2, "Polyclinique Lormont", 47.6398521f, -0.6159895f, 3));
         hopitaux.add(new Hopital(code3, "Hôpital Saint-André de Bordeaux", 52.5686517f, -0.5798204f, 7));
         // when ... then
-        when(hopitalFacade.findAllBySpecialiteLitDisponible(codespecialite)).thenReturn(hopitaux);
-        Assertions.assertEquals(3, hopitalFacade.findAllBySpecialiteLitDisponible(codespecialite).size());        
+        when(hopitalFacade.findHopitauxBySpecialite(codespecialite)).thenReturn(hopitaux);
+        Assertions.assertEquals(3, hopitalFacade.findHopitauxBySpecialite(codespecialite).size());        
         // verify
-        verify(hopitalFacade).findAllBySpecialiteLitDisponible(codespecialite);
+        verify(hopitalFacade).findHopitauxBySpecialite(codespecialite);
     }
 }

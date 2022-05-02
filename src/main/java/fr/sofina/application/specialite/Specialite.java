@@ -28,23 +28,23 @@ public class Specialite implements Serializable {
     @NotBlank
     private String nom;
 
-    @JoinColumn(name ="code_groupe_specialite")
+    @JoinColumn(name = "code_groupe_specialite")
     @ManyToOne
     private GroupeSpecialite groupe_specialite;
 
     public Specialite() {
     }
-    
+
     public Specialite(
             @JsonProperty("code_specialite") final Long codespecialite,
-            @JsonProperty("nom_specialite") final String nom,
-            @JsonProperty("groupe_specialite") final GroupeSpecialite groupe_specialite) {
+            @JsonProperty("nom_specialite") final String nom_specialite,
+            @JsonProperty("code_groupe_specialite") final GroupeSpecialite groupe_specialite) {
         this.code_specialite = codespecialite;
-        this.nom = nom;
+        this.nom = nom_specialite;
         this.groupe_specialite = groupe_specialite;
     }
 
-    public Long getCode_specialite() {
+    public Long getCodeSpecialite() {
         return code_specialite;
     }
 
@@ -56,7 +56,7 @@ public class Specialite implements Serializable {
         return groupe_specialite;
     }
 
-    public void setCode_specialite(Long code_specialite) {
+    public void setCodeSpecialite(Long code_specialite) {
         this.code_specialite = code_specialite;
     }
 

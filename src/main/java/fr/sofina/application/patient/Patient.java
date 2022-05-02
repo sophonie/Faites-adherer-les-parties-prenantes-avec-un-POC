@@ -80,7 +80,7 @@ public class Patient implements Serializable {
         this.genre = genre;
     }
 
-    public void setNo_SS(Long no_ss) {
+    public void setNO_SS(Long no_ss) {
         this.no_ss = no_ss;
     }
 
@@ -104,7 +104,7 @@ public class Patient implements Serializable {
         return genre;
     }
 
-    public Long getNo_SS() {
+    public Long getNO_SS() {
         return no_ss;
     }
 

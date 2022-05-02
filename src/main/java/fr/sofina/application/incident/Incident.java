@@ -31,10 +31,9 @@ public class Incident implements Serializable {
 
     @Column(name = "longitude_incident", nullable = false)
     private float longitude;
-    
+
     // The unsaved transient entity must be saved in an operation prior to saving these dependent entities :
     // ajouter (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "code_evenement")
     private Evenement evenement;
@@ -46,20 +45,22 @@ public class Incident implements Serializable {
     public Incident() {
     }
 
+    /*
     public Incident(float latitude, float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
+     */
+    //
+    //@JsonProperty("patient") final Patient patient
     public Incident(
             @JsonProperty("latitude_incident") float latitude,
             @JsonProperty("longitude_incident") float longitude,
-            @JsonProperty("evenement") final Evenement evenement,
-            @JsonProperty("patient") final Patient patient) {
+            @JsonProperty("evenement") Evenement evenement) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.evenement = evenement;
-        this.patient = patient;
+
     }
 
     public Long getCodeIncident() {

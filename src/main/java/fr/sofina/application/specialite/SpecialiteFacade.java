@@ -30,7 +30,7 @@ public class SpecialiteFacade implements SpecialiteService {
             Collection<Specialite> collection = specialiteRepository.findAllSpecialiteByCodeHopital(code);
             for (Specialite specialite : collection) {
                 final Specialite s = new Specialite();
-                s.setCode_specialite(specialite.getCode_specialite());
+                s.setCodeSpecialite(specialite.getCodeSpecialite());
                 s.setNom(specialite.getNom());
                 s.setGroupeSpecialite(specialite.getGroupeSpecialite());
 
