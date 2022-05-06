@@ -1,50 +1,78 @@
 package fr.sofina.application.possede;
 
+import fr.sofina.application.hopital.Hopital;
+import fr.sofina.application.incident.Incident;
+import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
+@Entity
 @Table(name = "TBHOPITAL_POSSEDE_INCIDENT", schema = "GESTION_URGENCE")
-public class HopitalPossedeIncident {
+public class HopitalPossedeIncident implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
-    private final Long id;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "possede_incident_id_seq"
+    )
+    @SequenceGenerator(
+            name = "possede_incident_id_seq",
+            sequenceName = "seq_possede_incident",
+            allocationSize = 1
+    )
+    @Column(
+            name = "id",
+            unique = true,
+            updatable = false,
+            nullable = false
+    )
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "code_hopital", nullable = false)
-    @NotBlank
-    private final Long code_hopital;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "code_hopital", unique = true, nullable = false)
+    private Hopital hopital;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "code_incident", unique = true, nullable = false)
-    @NotBlank
-    private final Long code_incident;
+    private Incident incident;
 
-    public HopitalPossedeIncident(Long id, Long code_hopital, Long code_incident) {
+    public HopitalPossedeIncident() {
+    }
+
+    public HopitalPossedeIncident(Long id, Hopital hopital, Incident incident) {
         this.id = id;
-        this.code_hopital = code_hopital;
-        this.code_incident = code_incident;
+        this.hopital = hopital;
+        this.incident = incident;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getCode_hopital() {
-        return code_hopital;
+    public Hopital getHopital() {
+        return hopital;
     }
 
-    public Long getCode_incident() {
-        return code_incident;
+    public Incident getIncident() {
+        return incident;
     }
-    
+
+    public void setHopital(Hopital hopital) {
+        this.hopital = hopital;
+    }
+
+    public void setIncident(Incident incident) {
+        this.incident = incident;
+    }
+
 }

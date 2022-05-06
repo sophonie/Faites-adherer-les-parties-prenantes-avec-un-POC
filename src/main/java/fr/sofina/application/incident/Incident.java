@@ -55,8 +55,7 @@ public class Incident implements Serializable {
     //@JsonProperty("patient") final Patient patient
     public Incident(
             @JsonProperty("latitude_incident") float latitude,
-            @JsonProperty("longitude_incident") float longitude,
-            @JsonProperty("evenement") Evenement evenement) {
+            @JsonProperty("longitude_incident") float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.evenement = evenement;

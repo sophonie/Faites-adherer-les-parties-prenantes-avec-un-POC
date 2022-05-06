@@ -1,13 +1,8 @@
 package fr.sofina.application.hopital;
 
-import fr.sofina.application.incident.IncidentIntrouvableException;
-import fr.sofina.application.incident.IncidentRepository;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,13 +15,9 @@ public class HopitalFacade implements HopitalService {
     @Qualifier("hopitalRepository")
     private final HopitalRepository hopitalRepository;
 
-    @Qualifier("incidentRepository")
-    private final IncidentRepository incidentRepository;
-
     @Autowired
-    public HopitalFacade(HopitalRepository hopitalRepository, IncidentRepository incidentRepository) {
+    public HopitalFacade(HopitalRepository hopitalRepository) {
         this.hopitalRepository = hopitalRepository;
-        this.incidentRepository = incidentRepository;
     }
 
     @Override
@@ -76,25 +67,4 @@ public class HopitalFacade implements HopitalService {
         }
         return hopitalRepository.findHopitauxBySpecialite(code);
     }
-
-    @Override
-    public String findHopital(Long code) { // code incident
-        Objects.nonNull(hopitalRepository);
-        if (Objects.isNull(code)) {
-            throw new IllegalArgumentException("Les valeurs passées en paramètre doit être des objets référencés.");
-        }
-
-        // si le code passé en paramètre n'est pas équivalent au dernier code incident présent en DB
-        if (!Objects.equals(incidentRepository.findLastId(), code)) {
-            try {
-                throw new IncidentIntrouvableException("Code incident introuvable dans la base de données.");
-            } catch (IncidentIntrouvableException ex) {
-                Logger.getLogger(HopitalFacade.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return Arrays.toString(hopitalRepository.findHopital(code));
-    }
-    
-    
 }

@@ -37,8 +37,8 @@ public class Specialite implements Serializable {
 
     public Specialite(
             @JsonProperty("code_specialite") final Long codespecialite,
-            @JsonProperty("nom_specialite") final String nom_specialite,
-            @JsonProperty("code_groupe_specialite") final GroupeSpecialite groupe_specialite) {
+            final String nom_specialite,
+            final GroupeSpecialite groupe_specialite) {
         this.code_specialite = codespecialite;
         this.nom = nom_specialite;
         this.groupe_specialite = groupe_specialite;

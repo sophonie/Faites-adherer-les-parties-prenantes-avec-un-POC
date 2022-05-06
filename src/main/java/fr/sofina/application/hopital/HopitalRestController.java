@@ -85,38 +85,23 @@ public class HopitalRestController {
         return hopitalFacade.findHopitauxBySpecialite(code);
     }
 
-    // ----------------------------------------------------------------------------------------------------------------
-    // Rechercher l'hôpital le plus proche pour un patient ayant un incident d'un type précis (cardiologie) ET que 
-    // l'urgence soit localisée près d'un hôpital disposant de ce soin ET qu'un lit soit disponible pour être réservé    
-    // ----------------------------------------------------------------------------------------------------------------
-    // ----------------------------------------------- créer l'incident -----------------------------------------------
-    // la création de l'incident va ajouter l'événement et le patient en DB
+    // ----------------------------------------------- créer l'incident -----------------------------------------------    
     @RequestMapping(value = "/api/medhead/incident", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED) // 201 CREATED
-    public Long creerIncident(@RequestBody Incident incident) {
+    public Hopital creerIncident(@RequestBody Incident incident) {
         if (Objects.isNull(incident)) {
             throw new IllegalArgumentException("L'incident passé en paramètre doit être un objet référencé.");
         }
         return incidentFacade.creerIncident(incident);
     }
-
-    // ----------------------------- proposition de l'hôpital le plus proche ------------------------------------------ 
-    @RequestMapping(value = "/api/v1/medhead/hopital/{code}", method = RequestMethod.GET,
-            produces = MediaType.TEXT_PLAIN_VALUE)
-    @ResponseStatus(HttpStatus.OK) // 200 OK    
-    public String findHopital(@PathVariable("code") Long code) { // code incident
-
-        logger.info("Recherche en cours de l'hôpital le plus proche proposant l'offre de soin.");
-
-        return hopitalFacade.findHopital(code);
-    }
     
-    // ----------------------------- Publication de l'événement : réservation d'un lit --------------------------------
-    @RequestMapping(value = "/api/medhead/evenement", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
-    @ResponseStatus(HttpStatus.OK) // 200 OK
-    public String publierEvenement() {
-        logger.info("Réservation du lit pour le patient admis aux urgences.");
-        return evenementFacade.publierEvenement();
+    // ---------------------------------------------- publier événement -----------------------------------------------
+    @RequestMapping(value = "/api/medhead/evenement/{code}", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK) // 200 CREATED
+    public String publierEvenement(@PathVariable("code") Long code) { // code incident
+        logger.info("Publication de l'événement pour la réservation d'un lit.");
+        return evenementFacade.publierEvenement(code);
     }
 }

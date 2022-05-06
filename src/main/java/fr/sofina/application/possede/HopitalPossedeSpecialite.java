@@ -1,7 +1,9 @@
 package fr.sofina.application.possede;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public final class HopitalPossedeSpecialite implements Serializable {
     @NotBlank
     private Long code_hopital;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "code_specialite", nullable = false)
     @NotBlank
     private Long codespecialite;

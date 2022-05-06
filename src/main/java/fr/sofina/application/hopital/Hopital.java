@@ -1,10 +1,13 @@
 package fr.sofina.application.hopital;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.sofina.application.incident.Incident;
 import fr.sofina.application.specialite.Specialite;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,10 +44,18 @@ public class Hopital implements Serializable {
     @Column(name = "lits_disponibles", nullable = false)
     @NotBlank
     private int litsDisponibles;
-    
-    @OneToMany(mappedBy = "code_specialite", fetch = FetchType.EAGER)
-    private List<Specialite> specialites = new ArrayList<>();
-    
+
+    @Column(name = "tel_hopital", nullable = true)
+    private String telephone;
+
+    @OneToMany(mappedBy = "code_specialite", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Specialite> specialites;
+
+    @OneToMany(mappedBy = "code_incident", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Incident> incidents;
+
     public Hopital() {
     }
 
@@ -57,19 +68,43 @@ public class Hopital implements Serializable {
             @JsonProperty("nom_hopital") final String nom,
             @JsonProperty("latitude_hopital") final float latitude,
             @JsonProperty("longitude_hopital") final float longitude,
-            @JsonProperty("lits_disponibles") final int lits_disponibles) {
+            @JsonProperty("lits_disponibles") final int lits_disponibles,
+            @JsonProperty("tel_hopital") final String telephone) {
         this.codehopital = codehopital;
         this.nom = nom;
         this.latitude = latitude;
         this.longitude = longitude;
         this.litsDisponibles = lits_disponibles;
+        this.telephone = telephone;
+        this.specialites = new HashSet<>();
+        this.incidents = new HashSet<>();
     }
 
-    public void setCodehopital(Long codehopital) {
+    public void setCodeHopital(Long codehopital) {
         this.codehopital = codehopital;
     }
 
-    public Long getCodehopital() {
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLitsDisponibles(int litsDisponibles) {
+        this.litsDisponibles = litsDisponibles;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Long getCodeHopital() {
         return codehopital;
     }
 
@@ -89,12 +124,24 @@ public class Hopital implements Serializable {
         return litsDisponibles;
     }
 
-    public List<Specialite> getSpecialites() {
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public Set<Specialite> getSpecialites() {
         return specialites;
     }
 
-    public void setSpecialites(List<Specialite> specialites) {
+    public void setSpecialites(Set<Specialite> specialites) {
         this.specialites = specialites;
     }
-    
+
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
 }

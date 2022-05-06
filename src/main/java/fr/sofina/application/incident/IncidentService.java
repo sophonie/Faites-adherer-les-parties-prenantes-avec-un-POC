@@ -1,10 +1,11 @@
 package fr.sofina.application.incident;
 
+import fr.sofina.application.hopital.Hopital;
 import org.springframework.stereotype.Component;
 
 @Component
 public interface IncidentService {
 
-    Long creerIncident(Incident incident); // retourne le code de l'incident
+    Hopital creerIncident(Incident incident); // retourne le code de l'incident
 
 }
