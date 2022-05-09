@@ -26,7 +26,7 @@ public class SpecialiteServiceTest { // Tests unitaires couche service
     @Test
     public void testFindAllSpecialiteByCodeHopital() {
         System.out.println("findAllSpecialiteByCodeHopital");
-        Long code = 1L;
+        final Long code = 1L;
         final List<Specialite> specialites = new ArrayList<>(); // expected
 
         final Long codespecialite1 = 1L;
@@ -66,7 +66,7 @@ public class SpecialiteServiceTest { // Tests unitaires couche service
         final GroupeSpecialite groupe_specialite = new GroupeSpecialite();
         groupe_specialite.setCodeGroupeSpecialite(1L);
         groupe_specialite.setNom("Anesthésie");
-        Specialite expected = specialiteFacade.findOneSpecialiteById(codespecialite);
+        final Specialite expected = specialiteFacade.findOneSpecialiteById(codespecialite);
         expected.setGroupeSpecialite(new GroupeSpecialite(groupe_specialite.getCodeGroupeSpecialite(), groupe_specialite.getNom()));
 
         assertEquals(expected.getCodeSpecialite(), codespecialite); // expected, actual

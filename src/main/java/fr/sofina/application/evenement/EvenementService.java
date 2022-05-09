@@ -6,7 +6,5 @@ import org.springframework.stereotype.Component;
 public interface EvenementService {
 
     Evenement creerEvenement(Evenement evenement);
-
-    String publierEvenement(Long code); // code de l'incident
     
 }

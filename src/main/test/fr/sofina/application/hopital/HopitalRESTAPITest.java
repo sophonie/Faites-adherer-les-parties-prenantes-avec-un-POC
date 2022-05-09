@@ -28,9 +28,9 @@ public class HopitalRESTAPITest { // Tests API REST couche controller avec Hamcr
     public void testLitsDisponibles() throws IOException {
         // given
         final int valeur = 7; // code hopital
-        HttpUriRequest request = new HttpGet("http://localhost:8080/api/medhead/lits/" + valeur);
+        final HttpUriRequest request = new HttpGet("http://localhost:8080/api/medhead/lits/" + valeur);
         // when
-        HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
+        final HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
         // then
         assertThat(httpResponse.getStatusLine().getStatusCode(), equalTo(HttpStatus.SC_OK));
     }
@@ -40,9 +40,9 @@ public class HopitalRESTAPITest { // Tests API REST couche controller avec Hamcr
     public void testFindSpecialiteByCode() throws IOException {
         // given
         final Long valeur = 11L; // code specialite
-        HttpUriRequest request = new HttpGet("http://localhost:8080/api/medhead/specialite/" + valeur);
+        final HttpUriRequest request = new HttpGet("http://localhost:8080/api/medhead/specialite/" + valeur);
         // when
-        HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
+        final HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
         // then
         assertThat(httpResponse.getStatusLine().getStatusCode(), equalTo(HttpStatus.SC_OK));
     }

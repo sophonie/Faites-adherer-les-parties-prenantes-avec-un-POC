@@ -1,6 +1,5 @@
 package fr.sofina.application.evenement;
 
-import fr.sofina.application.hopital.HopitalRepository;
 import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -20,13 +19,9 @@ public class EvenementFacade implements EvenementService {
     @Qualifier("persistenceUnit")
     private final EntityManager entityManager;
 
-    @Qualifier("hopitalRepository")
-    private final HopitalRepository hopitalRepository;
-
     @Autowired
-    public EvenementFacade(EntityManager entityManager, HopitalRepository hopitalRepository) {
+    public EvenementFacade(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.hopitalRepository = hopitalRepository;
     }
 
     @Override
@@ -38,13 +33,5 @@ public class EvenementFacade implements EvenementService {
 
         entityManager.persist(evenement);
         return evenement;
-    }
-
-    @Override
-    public String publierEvenement(Long code) { // code incident
-
-        final String message = "Réserver un lit " + hopitalRepository.findHopital(code).getNom() + ".";
-
-        return message;
     }
 }

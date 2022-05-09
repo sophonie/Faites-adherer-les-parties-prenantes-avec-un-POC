@@ -36,8 +36,7 @@ public class Evenement implements Serializable {
     public Evenement() {
     }
 
-    public Evenement(@JsonProperty("specialite") Specialite specialite) {        
-        this.code_evenement = code_evenement;        
+    public Evenement(@JsonProperty("specialite") Specialite specialite) {             
         this.specialite = specialite;
     }
     

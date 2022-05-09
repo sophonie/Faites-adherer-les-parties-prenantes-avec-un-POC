@@ -29,11 +29,11 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
     @Test
     @DisplayName("Vérifier si un hopital existe par son nom")
     void testIfHopitalExistsByNom() {
-        String nom = "Hôpital Public Saint-Augustin";
+        final String nom = "Hôpital Public Saint-Augustin";
         // given
-        Hopital hopital = new Hopital(nom);
+        final Hopital hopital = new Hopital(nom);
         // when        
-        boolean expected = hopitalRepository.existsByNom(hopital.getNom());
+        final boolean expected = hopitalRepository.existsByNom(hopital.getNom());
         // then
         assertThat(Boolean.TRUE).isEqualTo(expected);
     }
@@ -44,7 +44,7 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
 
         // given
         final Long code_specialite = 21L;
-        List<Hopital> hopitaux = new ArrayList<>();
+        final List<Hopital> hopitaux = new ArrayList<>();
         hopitaux.add(new Hopital("Hôpital Haut-Lévêque")); // actual
         hopitaux.add(new Hopital("Polyclinique Lormont"));
         hopitaux.add(new Hopital("Hôpital Saint-André de Bordeaux"));
@@ -63,23 +63,21 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
     @DisplayName("Vérifier que l'on puisse trouver un hôpital à partir d'un code incident")
     void testFindHopital() {
         // given
-        final Long code_incident = 1L; // code incident
+        final Long code_incident = 1L;
         final Long code_hopital = 9L;
         final String nom_hopital = "Hôpital Saint-André de Bordeaux";
         final float latitude_hopital = 44.568653f;
         final float longitude_hopital = -0.57982f;
         final int lits_disponibles = 3;
         final String tel_hopital = "05 56 79 56 79";
-        Incident incident = new Incident();
+        final Incident incident = new Incident();
         incident.setCodeIncident(code_incident);
         // when
-        Hopital hopital = new Hopital();
-        hopital.setCodeHopital(code_hopital);
-        hopital.setNom(nom_hopital);
-        hopital.setLatitude(latitude_hopital);
-        hopital.setLongitude(longitude_hopital);
-        hopital.setLitsDisponibles(lits_disponibles);
-        hopital.setTelephone(tel_hopital);
+        final Hopital hopital = new Hopital(
+                        code_hopital, nom_hopital, latitude_hopital,
+                        longitude_hopital, lits_disponibles, tel_hopital
+                );
+
         hopitalRepository.findHopital(incident.getCodeIncident());
         // then
         assertThat(hopital.getCodeHopital()).isEqualTo(code_hopital);
@@ -89,5 +87,4 @@ public class HopitalRepositoryTest { // Tests intégration couche repository ave
         assertThat(hopital.getLitsDisponibles()).isEqualTo(lits_disponibles);
         assertThat(hopital.getTelephone()).isEqualTo(tel_hopital);
     }
-
 }

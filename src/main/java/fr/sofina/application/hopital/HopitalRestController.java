@@ -95,13 +95,4 @@ public class HopitalRestController {
         }
         return incidentFacade.creerIncident(incident);
     }
-    
-    // ---------------------------------------------- publier événement -----------------------------------------------
-    @RequestMapping(value = "/api/medhead/evenement/{code}", method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK) // 200 CREATED
-    public String publierEvenement(@PathVariable("code") Long code) { // code incident
-        logger.info("Publication de l'événement pour la réservation d'un lit.");
-        return evenementFacade.publierEvenement(code);
-    }
 }
